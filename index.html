@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KK Food Products — Taste Once, Love It Forever</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --white:#ffffff;
+      --deep-blue:#2d4491;
+      --cyan:#29bac9;
+      --light-cyan:#f6fcfc;
+      --pink:#ec4184;
+      --text:#0b1730;
+      --wa-green:#128C7E;
+      --max-w:980px;
+      --radius:12px;
+      --g:18px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+      color:var(--text);
+      background:var(--white);
+      -webkit-font-smoothing:antialiased;
+      line-height:1.6;
+      padding-top:64px;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max-w);margin:0 auto;padding:20px;}
+
+    /* Header (plain) */
+    header.site-header{
+      position:fixed;top:0;left:0;right:0;height:64px;
+      display:flex;align-items:center;gap:12px;padding:10px 18px;background:var(--white);
+      border-bottom:1px solid rgba(41,186,201,0.05);z-index:100;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:48px;height:48px;object-fit:contain;border-radius:10px}
+    .brand .title{font-weight:700;font-family:Poppins;color:var(--deep-blue);font-size:16px}
+
+    /* HERO: shorter but lively */
+    .hero{
+      position:relative;
+      min-height:56vh;                 /* shorter than before but still large */
+      display:flex;flex-direction:column;justify-content:center;gap:14px;padding:28px;border-radius:12px;background:var(--white);
+      overflow:visible;
+    }
+
+    /* decorative shapes */
+    .decor {
+      position:absolute;right:-6%;top:-6%;width:340px;height:340px;pointer-events:none;z-index:0;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(41,186,201,0.12) 0 28%, transparent 29%),
+        radial-gradient(circle at 72% 58%, rgba(236,65,132,0.09) 0 25%, transparent 26%);
+      transform:rotate(6deg);
+      border-radius:36%;
+      filter: blur(10px);
+    }
+    .hero::after{
+      /* subtle diagonal pattern */
+      content:"";
+      position:absolute;left:0;bottom:0;right:0;height:22%;
+      background:linear-gradient(135deg, rgba(41,186,201,0.02) 25%, rgba(236,65,132,0.02) 75%);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .hero > *{position:relative;z-index:2} /* keep content above decorations */
+
+    .hero h1{font-family:Poppins;font-size:30px;margin:0;color:var(--deep-blue);line-height:1.03}
+    .hero p.lead{margin:0;font-size:17px;color:rgba(11,16,32,0.86)}
+    .hero .phones{margin-top:6px;font-weight:800;font-size:16px;color:var(--text)}
+    .hero .phones a{color:var(--deep-blue);font-weight:800}
+
+    .ctas{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 14px;border-radius:12px;font-weight:800;font-size:15px;border:0;cursor:pointer}
+    .btn-wa{background:var(--wa-green);color:#fff}
+    .btn-map{background:transparent;border:2px solid var(--deep-blue);color:var(--deep-blue)}
+
+    /* sections */
+    .section{padding:24px 0}
+    .section-title{font-size:20px;font-weight:800;color:var(--deep-blue);margin:0 0 12px;display:flex;align-items:center;gap:8px;justify-content:center}
+    .section-sub{font-size:15px;color:rgba(11,16,32,0.72);margin:0 0 12px;text-align:center}
+
+    .about{max-width:760px;margin:0 auto;text-align:justify;font-size:15px;color:rgba(11,16,32,0.88)}
+
+    .alt-bg{background:var(--light-cyan);border-top:1px solid rgba(41,186,201,0.03);border-bottom:1px solid rgba(41,186,201,0.03)}
+
+    /* products */
+    .product-range{background:var(--white);padding:12px;border-radius:12px;border:1px solid rgba(11,16,32,0.04);box-shadow:0 8px 26px rgba(12,18,35,0.04);margin-bottom:18px}
+    .range-head{display:flex;flex-direction:column;align-items:center;gap:6px}
+    .range-title{font-weight:800;color:var(--deep-blue);font-size:16px}
+    .range-desc{font-size:14px;color:rgba(11,16,32,0.72);text-align:center}
+
+    .carousel{display:flex;gap:12px;overflow:auto;padding:12px 0 6px;scroll-snap-type:x mandatory}
+    .carousel img{flex:0 0 80%;height:170px;border-radius:12px;object-fit:cover;scroll-snap-align:center;border:1px solid rgba(11,16,32,0.04)}
+    @media(min-width:720px){ .carousel img{flex:0 0 320px;height:220px} }
+
+    .range-actions{display:flex;gap:10px;justify-content:center;margin-top:10px}
+    .action-small{padding:10px 12px;border-radius:10px;font-weight:700;border:1px solid rgba(11,16,32,0.06);background:transparent;color:var(--deep-blue);font-size:14px}
+
+    /* visit us */
+    .visit-card{display:flex;flex-direction:column;align-items:center;gap:12px}
+    .visit-card img{width:100%;max-width:520px;border-radius:12px;border:1px solid rgba(11,16,32,0.04)}
+    .visit-meta{text-align:center}
+    .visit-meta .addr{font-weight:800;color:var(--text);margin-bottom:6px}
+    .visit-meta .landmark{color:rgba(11,16,32,0.7)}
+
+    /* contact */
+    .contact-card{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:12px;border:1px solid rgba(11,16,32,0.04);max-width:520px;background:var(--white);margin:0 auto}
+    .contact-row{display:flex;flex-direction:column;gap:8px;align-items:center}
+    .contact-call{font-weight:800;color:var(--deep-blue)}
+    .contact-wa{font-weight:800;color:var(--wa-green)}
+
+    /* footer */
+    footer{margin-top:30px;padding:18px 0;text-align:center;color:rgba(11,16,32,0.6);font-size:13px}
+
+    /* floating whatsapp */
+    .whatsapp-float{position:fixed;right:14px;bottom:14px;z-index:200}
+    .whatsapp-circle{width:56px;height:56px;border-radius:999px;background:var(--wa-green);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(18,140,126,0.14)}
+    .whatsapp-circle svg{width:26px;height:26px;fill:#fff}
+
+    /* emoji size */
+    .emoji{font-size:18px;line-height:1}
+
+    @media(min-width:880px){
+      .hero{min-height:46vh}
+      .hero h1{font-size:40px}
+      .carousel img{height:260px}
+    }
+  </style>
+</head>
+<body>
+  <!-- header -->
+  <header class="site-header" role="banner">
+    <div class="brand" aria-label="KK Food Products">
+      <img src="kk food products logo.png" alt="KK Food Products logo" onerror="this.style.display='none'">
+      <div class="title">KK Food Products</div>
+    </div>
+  </header>
+
+  <main class="wrap" id="content">
+    <!-- hero -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="decor" aria-hidden="true"></div>
+
+      <h1 id="hero-heading">KK Food Products <span class="emoji">🥘</span></h1>
+      <p class="lead">Taste Once, <span style="color:var(--pink)">Love It Forever</span></p>
+
+      <div class="phones" aria-label="Phone numbers">
+        Call: <a href="tel:9011977177">90119 77177</a> / <a href="tel:9822525626">98225 25626</a>
+      </div>
+
+      <div class="ctas" role="group" aria-label="Primary actions">
+        <a id="heroWa" class="btn btn-wa" href="#" aria-label="Chat on WhatsApp">💬 Chat / Order on WhatsApp</a>
+        <a id="heroMap" class="btn btn-map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=47/11%20Panchshil%20Taware%20Colony%20Pune">📍 Find us on Map</a>
+      </div>
+    </section>
+
+    <!-- about (centered title) -->
+    <section class="alt-bg section" aria-labelledby="about-heading">
+      <div class="wrap">
+        <h2 id="about-heading" class="section-title">About <span class="emoji">🍪</span></h2>
+        <p class="about">KK Food Products is a Pune-based retail brand offering a curated range of packaged food items — snacks, makhana, traditional sweets and specialty treats. We focus on reliable taste, neat packaging, and quick availability. Buy directly over WhatsApp or call us anytime.</p>
+      </div>
+    </section>
+
+    <!-- products -->
+    <section class="section" aria-labelledby="products-heading">
+      <div class="wrap">
+        <h2 id="products-heading" class="section-title">Our Products <span class="emoji">🛒</span></h2>
+        <p class="section-sub">Tap an image to view larger. To order, use the main WhatsApp button or call the numbers above.</p>
+
+        <div id="rangesContainer" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- visit us -->
+    <section class="alt-bg section" aria-labelledby="visit-heading">
+      <div class="wrap">
+        <h2 id="visit-heading" class="section-title">Visit Us <span class="emoji">📍</span></h2>
+
+        <div class="visit-card">
+          <img src="images/map.jpg" alt="Map to KK Food Products" onerror="this.style.display='none'">
+          <div class="visit-meta">
+            <div class="addr">47/11 Panchshil Taware Colony, Near Kaware Garden, Hotel Navratna Lane, Pune Satara Road, Pune - 411009</div>
+            <div class="landmark">Landmark: Hotel Navratna Lane</div>
+            <div>Hours: <strong>10:00 AM — 8:00 PM</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- contact -->
+    <section class="section" aria-labelledby="contact-heading">
+      <div class="wrap">
+        <h2 id="contact-heading" class="section-title">Contact Us <span class="emoji">📞</span></h2>
+
+        <div class="contact-card">
+          <div class="contact-row">
+            <div>
+              <div class="contact-call">Call</div>
+              <div><a href="tel:9011977177">90119 77177</a> / <a href="tel:9822525626">98225 25626</a></div>
+            </div>
+
+            <div>
+              <div class="contact-wa">WhatsApp</div>
+              <div><a id="contactWa" href="#">90119 77177</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer>
+      <div>© KK Food Products — All rights reserved.</div>
+    </footer>
+  </main>
+
+  <!-- floating WA -->
+  <div class="whatsapp-float" aria-hidden="false">
+    <a id="floatWa" class="whatsapp-circle" href="#" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.9 11.9 0 0012 1C6.5 1 2 5.5 2 11c0 1.9.5 3.6 1.5 5.1L2 23l6.1-1.6C9.3 21.6 10.6 22 12 22c5.5 0 10-4.5 10-10 0-2.6-1-5-3.5-7.5z" fill="#fff"/><path d="M17.6 14.2c-.3-.2-1.7-.8-1.9-.9-.3-.1-.4-.2-.6.2s-.7.9-.9 1.1c-.2.2-.4.3-.7.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.8-2.2-1.9-2.6-.1-.3 0-.5.1-.7.1-.2.2-.4.3-.6.1-.2 0-.4 0-.6 0-.2-.6-1.5-.8-2-.2-.5-.4-.4-.7-.4-.2 0-.5 0-.8 0-.3 0-.6.1-.8.6s-1 1.8-1 3.4.9 3.8 1 4.2 1.9 3 4.6 4.3c3 .5 3.1-1.1 3.3-1.2.2-.1 1.6-1.4 1.6-2.5 0-1.1-.1-1.2-.8-1.5z" fill="#fff"/></svg>
+    </a>
+  </div>
+
+  <script>
+    /* ========== EDIT BEFORE PUBLISH ==========
+       - Set WHATSAPP_NUMBER to client's number in international format (no +).
+         e.g. 919011977177
+       - Update IMAGES_CONFIG filenames if yours differ.
+    */
+    const WHATSAPP_NUMBER = '919011977177';
+    const WHATSAPP_MSG_MAIN = "Hi KK Food Products, I want to place an order.";
+
+    function waLink(num, text){ return `https://wa.me/${num}?text=${encodeURIComponent(text)}`; }
+
+    // wire main buttons
+    document.getElementById('heroWa').href = waLink(WHATSAPP_NUMBER, WHATSAPP_MSG_MAIN);
+    document.getElementById('floatWa').href = waLink(WHATSAPP_NUMBER, WHATSAPP_MSG_MAIN);
+    document.getElementById('contactWa').href = waLink(WHATSAPP_NUMBER, WHATSAPP_MSG_MAIN);
+
+    // product images config (edit to exact filenames you upload)
+    const IMAGES_CONFIG = [
+      { id:'tendoze', title:'Tendoze', desc:'Haldi • Ginger', folder:'images/tendoze/', images:['haldi.jpg','ginger.jpg'] },
+      { id:'chocolate', title:'Chocolate Range', desc:'Loyka Kunafa & chocolates', folder:'images/chocolate/', images:['loyka-kunafa.jpg'] },
+      { id:'new-tree-traditional', title:'New Tree Traditional', desc:'Kalkatti paan, ladoos, cookies', folder:'images/new-tree-traditional/', images:['kalkatti-paan.jpg','roasted-nut-mix.jpg','jaggery-sesame-ladoo.jpg'] },
+      { id:'makhana', title:'Makhana Flavours', desc:'Cheese & Pepper • Garlic & Herb • Krazy Korean • Tomato & Basil', folder:'images/makhana/', images:['cheese-pepper.jpg','garlic-herb.jpg','krazy-korean-spice.jpg','tomato-and-basil.jpg'] }
+    ];
+
+    // build product ranges
+    const container = document.getElementById('rangesContainer');
+    function safeAlt(name){ return name.replace(/[-_]+/g,' ').replace(/\.(jpg|jpeg|png|webp)$/i,''); }
+
+    IMAGES_CONFIG.forEach(range=>{
+      const el = document.createElement('div');
+      el.className = 'product-range';
+      el.innerHTML = `
+        <div class="range-head">
+          <div>
+            <div class="range-title">${range.title}</div>
+            <div class="range-desc">${range.desc}</div>
+          </div>
+        </div>
+        <div class="carousel" aria-label="${range.title} images"></div>
+      `;
+      const car = el.querySelector('.carousel');
+
+      if(Array.isArray(range.images) && range.images.length){
+        range.images.forEach(fname=>{
+          const img = document.createElement('img');
+          img.src = encodeURI(range.folder + fname);
+          img.alt = safeAlt(fname) + ' — ' + range.title;
+          img.loading = 'lazy';
+          img.onerror = function(){ this.style.display='none'; };
+          car.appendChild(img);
+        });
+      } else {
+        const no = document.createElement('div');
+        no.textContent = 'No images. Add images to ' + range.folder;
+        car.appendChild(no);
+      }
+
+      const actions = document.createElement('div');
+      actions.className = 'range-actions';
+      actions.innerHTML = `
+        <a class="action-small" href="tel:9011977177">📞 Call</a>
+        <a class="action-small" href="${waLink(WHATSAPP_NUMBER, 'Hi, I want to buy '+range.title)}">💬 WhatsApp</a>
+      `;
+      el.appendChild(actions);
+      container.appendChild(el);
+    });
+
+    // tap images to open larger
+    document.addEventListener('click', function(e){
+      if(e.target && e.target.tagName === 'IMG' && e.target.closest('.carousel')){
+        window.open(e.target.src,'_blank');
+      }
+    });
+  </script>
+</body>
+</html>
